@@ -10,6 +10,12 @@ describe Nemah do
       expect { a_horse_without(:gender) }.to raise_error(ArgumentError, 'gender required')
     end
 
+    it 'cannot have a nonexisting gender' do
+      expect {
+        a_horse_with(gender: :nonexisting)
+      }.to raise_error(ArgumentError, '":nonexisting" is not an allowed gender')
+    end
+
     it 'can be named' do
       expect(a_horse_named('Nemah').name).to eq('Nemah')
     end
@@ -51,7 +57,7 @@ describe Nemah do
     end
 
     def default_attributes
-      { weight: 450, gender: 'mare' }
+      { weight: 450, gender: :mare }
     end
   end
 end
