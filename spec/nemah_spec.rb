@@ -13,7 +13,7 @@ describe Nemah do
     it 'cannot have a nonexisting gender' do
       expect {
         a_horse_with(gender: :nonexisting)
-      }.to raise_error(ArgumentError, '":nonexisting" is not an allowed gender')
+      }.to raise_error(ArgumentError, ':nonexisting is not an allowed gender')
     end
 
     it 'can be named' do
@@ -35,7 +35,13 @@ describe Nemah do
     it 'cannot be impossible to feed' do
       expect {
         a_horse_with(feedability: :impossible)
-      }.to raise_error(ArgumentError, '":impossible" is not an allowed feedability')
+      }.to raise_error(ArgumentError, ':impossible is not an allowed feedability')
+    end
+
+    it 'cannot have a negative weight' do
+      expect {
+        a_horse_with(weight: -50)
+      }.to raise_error(ArgumentError, '-50 is not an allowed weight')
     end
 
     private

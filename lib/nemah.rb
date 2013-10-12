@@ -17,13 +17,14 @@ module Nemah
       @feedability = attributes.fetch(:feedability, :normal)
       assert_valid(:feedability)
       assert_valid(:gender)
+      assert_valid(:weight)
     end
 
     private
 
     def assert_valid(attribute)
       unless allowed_values_for(attribute).include? send(attribute)
-        raise ArgumentError, "\"#{send(attribute).inspect}\" is not an allowed #{attribute}"
+        raise ArgumentError, "#{send(attribute).inspect} is not an allowed #{attribute}"
       end
     end
 
@@ -31,6 +32,7 @@ module Nemah
       case attribute
       when :gender then allowed_genders
       when :feedability then allowed_feedabilities
+      when :weight then PositiveWeight.new
       else
         Everything.new
       end
@@ -42,6 +44,12 @@ module Nemah
 
     def allowed_genders
       [:gelding, :mare, :stallion]
+    end
+  end
+
+  class PositiveWeight
+    def include?(weight)
+      weight >= 0
     end
   end
 
