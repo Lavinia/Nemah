@@ -6,7 +6,7 @@ Nemah is a library for calculating the proper amount of fodder for your horse. I
 
 ## Requirements
 
-Given that Nemah is an Arabian princess, she wants as many rubies as possible, but no fewer than 1.9.3.
+Given that Nemah is an Arabian princess, she wants as many rubies as possible, but no fewer than 2.0.
 
 ## Installation.
 
