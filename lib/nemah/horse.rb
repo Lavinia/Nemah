@@ -14,12 +14,14 @@ module Nemah
       @name = attributes.fetch(:name, '')
       @feedability = attributes.fetch(:feedability, :normal)
       @workload = attributes.fetch(:workload, Workload.new)
-      assert_valid(:feedability)
-      assert_valid(:gender)
-      assert_valid(:weight)
+      assert_validity_of(:feedability, :gender, :weight)
     end
 
     private
+
+    def assert_validity_of(*attributes)
+      attributes.each { |attribute| assert_valid(attribute) }
+    end
 
     def assert_valid(attribute)
       unless allowed_values_for(attribute).include? send(attribute)
