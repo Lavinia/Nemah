@@ -44,6 +44,11 @@ describe Nemah do
       }.to raise_error(ArgumentError, '-50 is not an allowed weight')
     end
 
+    it 'defaults to no workload' do
+      no_workload = Nemah::Workload.new(walk: 0, trot_and_canter: 0, days_per_week: 0)
+      expect(a_horse_without(:workload).workload).to eq(no_workload)
+    end
+
     private
 
     def a_horse
