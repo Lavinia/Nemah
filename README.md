@@ -2,9 +2,11 @@
 
 Nemah is a library for calculating the proper amount of fodder for your horse. In real life, Nemah is an [Arabian horse](http://en.wikipedia.org/wiki/Arabian_horse) with an immense appetite.
 
+## Build Status [![Build Status](https://secure.travis-ci.org/Lavinia/Nemah.png)](http://travis-ci.org/Lavinia/Nemah)
+
 ## Requirements
 
-Given that Nemah is an Arabian princess, she wants as many rubies as possible, but no fewer than 2.0
+Given that Nemah is an Arabian princess, she wants as many rubies as possible, but no fewer than 1.9.3.
 
 ## Installation.
 
