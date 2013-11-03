@@ -55,6 +55,12 @@ describe Nemah do
       end
     end
 
+    describe '#weight_in_deciton' do
+      it 'returns the weight divided by a hundred' do
+        expect(a_horse_with(weight: 650).weight_in_deciton).to eq(6.5)
+      end
+    end
+
     private
 
     def a_horse

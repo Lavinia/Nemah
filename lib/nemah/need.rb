@@ -7,19 +7,23 @@ module Nemah
     end
 
     def solids
-      rounded_range(horse_weight_in_deciton * 1.50, Float::INFINITY)
+      rounded_range(horse.weight_in_deciton * 1.50, Float::INFINITY)
     end
 
     def selenium
-      rounded_range(horse_weight_in_deciton * 0.20, horse_weight_in_deciton * 5.00)
+      rounded_range(horse.weight_in_deciton * 0.20, horse.weight_in_deciton * 5.00)
     end
 
     def energy
-      rounded_range(min_energy, max_energy)
+      Energy.new(self).to_rounded_range
     end
 
     def protein
-      rounded_range(min_protein, max_protein)
+      Protein.new(self).to_rounded_range
+    end
+
+    def ideal_energy
+      Energy.new(self).ideal
     end
 
     private
@@ -27,6 +31,20 @@ module Nemah
     def rounded_range(low, high)
       low.round(2)..high.round(2)
     end
+  end
+
+  class Protein
+    attr_reader :need
+
+    def initialize(need)
+      @need = need
+    end
+
+    def to_rounded_range
+      min_protein.round(2)..max_protein.round(2)
+    end
+
+    private
 
     def ideal_protein
       ideal_energy * 6
@@ -40,33 +58,27 @@ module Nemah
       1.10 * ideal_protein
     end
 
-    def min_energy
-      ideal_energy - 3
-    end
-
-    def max_energy
-      ideal_energy + 3
-    end
-
     def ideal_energy
+      need.ideal_energy
+    end
+  end
+
+  class Energy
+    attr_reader :need
+
+    def initialize(need)
+      @need = need
+    end
+
+    def ideal
       0.50 * (horse.weight ** 0.75 ) * feedability_factor * gender_factor + workload_energy
     end
 
-    def workload_energy
-      energy_addition_for_walk + energy_addition_for_trot_and_canter
+    def to_rounded_range
+      min.round(2)..max.round(2)
     end
 
-    def energy_addition_for_walk
-      (0.20 * horse_weight_in_deciton * horse.workload.walk / 10.0) * days_per_week_factor
-    end
-
-    def energy_addition_for_trot_and_canter
-      (1.30 * horse_weight_in_deciton * horse.workload.trot_and_canter / 10.0) * days_per_week_factor
-    end
-
-    def days_per_week_factor
-      horse.workload.days_per_week / 7.0
-    end
+    private
 
     def feedability_factor
       case horse.feedability
@@ -80,8 +92,32 @@ module Nemah
       (horse.stallion?) ? 1.10 : 1.00
     end
 
-    def horse_weight_in_deciton
-      horse.weight / 100.00
+    def workload_energy
+      energy_addition_for_walk + energy_addition_for_trot_and_canter
+    end
+
+    def energy_addition_for_walk
+      (0.20 * horse.weight_in_deciton * horse.workload.walk / 10.0) * days_per_week_factor
+    end
+
+    def energy_addition_for_trot_and_canter
+      (1.30 * horse.weight_in_deciton * horse.workload.trot_and_canter / 10.0) * days_per_week_factor
+    end
+
+    def days_per_week_factor
+      horse.workload.days_per_week / 7.0
+    end
+
+    def min
+      ideal - 3
+    end
+
+    def max
+      ideal + 3
+    end
+
+    def horse
+      need.horse
     end
   end
 end

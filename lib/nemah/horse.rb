@@ -21,6 +21,10 @@ module Nemah
       gender == :stallion
     end
 
+    def weight_in_deciton
+      weight / 100.00
+    end
+
     private
 
     def assert_validity_of(*attributes)
