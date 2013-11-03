@@ -19,7 +19,7 @@ module Nemah
     end
 
     def protein
-      Protein.new(self)
+      Nemah::SpecificNeed::Protein.new(self)
     end
 
   class SpecificNeed
@@ -31,26 +31,6 @@ module Nemah
 
     def to_rounded_range
       min.round(2)..max.round(2)
-    end
-  end
-
-  class Protein < SpecificNeed
-    private
-
-    def ideal
-      ideal_energy * 6
-    end
-
-    def min
-      0.90 * ideal
-    end
-
-    def max
-      1.10 * ideal
-    end
-
-    def ideal_energy
-      need.energy.ideal
     end
   end
 
