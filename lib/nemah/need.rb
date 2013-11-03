@@ -11,7 +11,7 @@ module Nemah
     end
 
     def selenium
-      Selenium.new(self)
+      Nemah::SpecificNeed::Selenium.new(self)
     end
 
     def energy
@@ -21,7 +21,6 @@ module Nemah
     def protein
       Protein.new(self)
     end
-  end
 
   class SpecificNeed
     attr_reader :need
@@ -32,22 +31,6 @@ module Nemah
 
     def to_rounded_range
       min.round(2)..max.round(2)
-    end
-  end
-
-  class Selenium < SpecificNeed
-    private
-
-    def min
-      horse.weight_in_deciton * 0.20
-    end
-
-    def max
-      horse.weight_in_deciton * 5.00
-    end
-
-    def horse
-      need.horse
     end
   end
 
@@ -134,4 +117,5 @@ module Nemah
       need.horse
     end
   end
+end
 end
