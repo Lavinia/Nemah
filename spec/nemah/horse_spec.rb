@@ -10,10 +10,10 @@ describe Nemah do
       expect { a_horse_without(:gender) }.to raise_error(ArgumentError, 'gender required')
     end
 
-    it 'cannot have a nonexisting gender' do
+    it 'cannot have a non-existing gender' do
       expect {
-        a_horse_with(gender: :nonexisting)
-      }.to raise_error(ArgumentError, ':nonexisting is not an allowed gender')
+        a_horse_with(gender: :non_existing)
+      }.to raise_error(ArgumentError, ':non_existing is not an allowed gender')
     end
 
     it 'can be named' do
@@ -47,6 +47,12 @@ describe Nemah do
     it 'defaults to no workload' do
       no_workload = Nemah::Workload.new(walk: 0, trot_and_canter: 0, days_per_week: 0)
       expect(a_horse_without(:workload).workload).to eq(no_workload)
+    end
+
+    describe '#stallion?' do
+      it 'returns true if the horse is a stallion' do
+        expect(a_horse_with gender: :stallion).to be_stallion
+      end
     end
 
     private

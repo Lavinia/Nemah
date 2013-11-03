@@ -17,6 +17,10 @@ module Nemah
       assert_validity_of(:feedability, :gender, :weight)
     end
 
+    def stallion?
+      gender == :stallion
+    end
+
     private
 
     def assert_validity_of(*attributes)
