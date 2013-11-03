@@ -7,7 +7,7 @@ module Nemah
     end
 
     def solids
-      Solids.new(self)
+      Nemah::SpecificNeed::Solids.new(self)
     end
 
     def selenium
@@ -31,22 +31,6 @@ module Nemah
 
     def to_rounded_range
       min.round(2)..max.round(2)
-    end
-  end
-
-  class Solids < SpecificNeed
-    private
-
-    def min
-      horse.weight_in_deciton * 1.50
-    end
-
-    def max
-      Float::INFINITY
-    end
-
-    def horse
-      need.horse
     end
   end
 
