@@ -7,75 +7,89 @@ module Nemah
     end
 
     def solids
-      rounded_range(horse.weight_in_deciton * 1.50, Float::INFINITY)
+      Solids.new(self)
     end
 
     def selenium
-      rounded_range(horse.weight_in_deciton * 0.20, horse.weight_in_deciton * 5.00)
+      Selenium.new(self)
     end
 
     def energy
-      Energy.new(self).to_rounded_range
+      Energy.new(self)
     end
 
     def protein
-      Protein.new(self).to_rounded_range
-    end
-
-    def ideal_energy
-      Energy.new(self).ideal
-    end
-
-    private
-
-    def rounded_range(low, high)
-      low.round(2)..high.round(2)
+      Protein.new(self)
     end
   end
 
-  class Protein
+  class SpecificNeed
     attr_reader :need
 
     def initialize(need)
       @need = need
-    end
-
-    def to_rounded_range
-      min_protein.round(2)..max_protein.round(2)
-    end
-
-    private
-
-    def ideal_protein
-      ideal_energy * 6
-    end
-
-    def min_protein
-      0.90 * ideal_protein
-    end
-
-    def max_protein
-      1.10 * ideal_protein
-    end
-
-    def ideal_energy
-      need.ideal_energy
-    end
-  end
-
-  class Energy
-    attr_reader :need
-
-    def initialize(need)
-      @need = need
-    end
-
-    def ideal
-      0.50 * (horse.weight ** 0.75 ) * feedability_factor * gender_factor + workload_energy
     end
 
     def to_rounded_range
       min.round(2)..max.round(2)
+    end
+  end
+
+  class Selenium < SpecificNeed
+    private
+
+    def min
+      horse.weight_in_deciton * 0.20
+    end
+
+    def max
+      horse.weight_in_deciton * 5.00
+    end
+
+    def horse
+      need.horse
+    end
+  end
+
+  class Solids < SpecificNeed
+    private
+
+    def min
+      horse.weight_in_deciton * 1.50
+    end
+
+    def max
+      Float::INFINITY
+    end
+
+    def horse
+      need.horse
+    end
+  end
+
+  class Protein < SpecificNeed
+    private
+
+    def ideal
+      ideal_energy * 6
+    end
+
+    def min
+      0.90 * ideal
+    end
+
+    def max
+      1.10 * ideal
+    end
+
+    def ideal_energy
+      need.energy.ideal
+    end
+  end
+
+  class Energy < SpecificNeed
+    def ideal
+      0.50 * (horse.weight ** 0.75 ) * feedability_factor * gender_factor + workload_energy
     end
 
     private
