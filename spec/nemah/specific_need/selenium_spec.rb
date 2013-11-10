@@ -17,6 +17,26 @@ describe Nemah::SpecificNeed::Selenium do
     end
   end
 
+  describe '#min' do
+    it 'returns the minimum selenium need' do
+      expect(selenium.min).to eq(1.06)
+    end
+
+    it 'optionally takes the number of decimals' do
+      expect(selenium.min(decimals: 1)).to eq(1.1)
+    end
+  end
+
+  describe '#max' do
+    it 'returns the maximum selenium need' do
+      expect(selenium.max).to eq(26.50)
+    end
+
+    it 'optionally takes the number of decimals' do
+      expect(selenium.max(decimals: 0)).to eq(27)
+    end
+  end
+
   private
 
   def selenium

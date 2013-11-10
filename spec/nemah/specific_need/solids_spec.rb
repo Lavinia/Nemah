@@ -17,6 +17,26 @@ describe Nemah::SpecificNeed::Solids do
     end
   end
 
+  describe '#min' do
+    it 'returns the minimum solids need' do
+      expect(solids.min).to eq(7.65)
+    end
+
+    it 'optionally takes the number of decimals' do
+      expect(solids.min(decimals: 1)).to eq(7.7)
+    end
+  end
+
+  describe '#max' do
+    it 'returns the maximum solids need' do
+      expect(solids.max).to eq(Float::INFINITY)
+    end
+
+    it 'optionally takes the number of decimals' do
+      expect(solids.max(decimals: 10)).to eq(Float::INFINITY)
+    end
+  end
+
   private
 
   def solids

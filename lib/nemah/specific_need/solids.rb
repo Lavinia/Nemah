@@ -7,11 +7,11 @@ module Nemah
         min
       end
 
-      def min
+      def _min
         horse.weight_in_deciton * 1.50
       end
 
-      def max
+      def _max
         Float::INFINITY
       end
     end

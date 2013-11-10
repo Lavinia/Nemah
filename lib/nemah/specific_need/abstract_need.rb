@@ -11,6 +11,14 @@ module Nemah
         _ideal.round(decimals)
       end
 
+      def min(decimals: 2)
+        _min.round(decimals)
+      end
+
+      def max(decimals: 2)
+        _max.round(decimals)
+      end
+
       def to_rounded_range
         min.round(2)..max.round(2)
       end
@@ -21,16 +29,16 @@ module Nemah
         raise NotImplementedError, '#_ideal() must return an object responding to #round(n)'
       end
 
-      def horse
-        need.horse
-      end
-
-      def min
+      def _min
         raise NotImplementedError, '#min() must return an object responding to #round(n)'
       end
 
-      def max
+      def _max
         raise NotImplementedError, '#max() must return an object responding to #round(n)'
+      end
+
+      def horse
+        need.horse
       end
     end
   end

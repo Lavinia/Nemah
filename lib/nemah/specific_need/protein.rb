@@ -7,11 +7,11 @@ module Nemah
         ideal_energy * 6
       end
 
-      def min
+      def _min
         0.90 * _ideal
       end
 
-      def max
+      def _max
         1.10 * _ideal
       end
 

@@ -17,6 +17,26 @@ describe Nemah::SpecificNeed::Protein do
     end
   end
 
+  describe '#min' do
+    it 'returns the minimum protein need' do
+      expect(protein.min).to eq(288.63)
+    end
+
+    it 'optionally takes the number of decimals' do
+      expect(protein.min(decimals: 1)).to eq(288.6)
+    end
+  end
+
+  describe '#max' do
+    it 'returns the maximum protein need' do
+      expect(protein.max).to eq(352.77)
+    end
+
+    it 'optionally takes the number of decimals' do
+      expect(protein.max(decimals: 1)).to eq(352.8)
+    end
+  end
+
   def protein
     Nemah::SpecificNeed::Protein.new(need)
   end

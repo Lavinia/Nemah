@@ -17,6 +17,26 @@ describe Nemah::SpecificNeed::Energy do
     end
   end
 
+  describe '#min' do
+    it 'returns the minimum energy need' do
+      expect(energy.min).to eq(77.98)
+    end
+
+    it 'optionally takes the number of decimals' do
+      expect(energy.min(decimals: 4)).to eq(77.9823)
+    end
+  end
+
+  describe '#max' do
+    it 'returns the maximum energy need' do
+      expect(energy.max).to eq(83.98)
+    end
+
+    it 'optionally takes the number of decimals' do
+      expect(energy.max(decimals: 0)).to eq(84)
+    end
+  end
+
   private
 
   def energy

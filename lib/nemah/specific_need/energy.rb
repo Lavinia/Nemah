@@ -35,11 +35,11 @@ module Nemah
         horse.workload.days_per_week / 7.0
       end
 
-      def min
+      def _min
         _ideal - 3
       end
 
-      def max
+      def _max
         _ideal + 3
       end
     end
