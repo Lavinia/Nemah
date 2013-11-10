@@ -27,6 +27,7 @@ Or install it yourself as:
 ### Initial version
 
 * Calculate a horse's need of nutrients.
+* Calculations are made internally with at least three digits precision. Public methods will return values rounded to two decimals by default.
 
 ### Yet to be implemented
 

@@ -1,11 +1,15 @@
 module Nemah
   module SpecificNeed
     class Energy < AbstractNeed
-      def ideal
-        0.50 * (horse.weight ** 0.75 ) * feedability_factor * gender_factor + workload_energy
+      def ideal(decimals: 2)
+        _ideal.round(decimals)
       end
 
       private
+
+      def _ideal
+        0.50 * (horse.weight ** 0.75 ) * feedability_factor * gender_factor + workload_energy
+      end
 
       def feedability_factor
         case horse.feedability
@@ -36,11 +40,11 @@ module Nemah
       end
 
       def min
-        ideal - 3
+        _ideal - 3
       end
 
       def max
-        ideal + 3
+        _ideal + 3
       end
     end
   end

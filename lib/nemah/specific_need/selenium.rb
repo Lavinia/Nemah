@@ -1,8 +1,8 @@
 module Nemah
   module SpecificNeed
     class Selenium < AbstractNeed
-      def ideal
-        min
+      def ideal(decimals: 2)
+        min.round(decimals)
       end
 
       private

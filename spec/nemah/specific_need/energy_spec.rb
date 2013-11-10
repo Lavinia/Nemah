@@ -9,7 +9,11 @@ describe Nemah::SpecificNeed::Energy do
 
   describe '#ideal' do
     it 'returns the ideal energy need' do
-      expect(energy.ideal.round(2)).to eq(80.98)
+      expect(energy.ideal).to eq(80.98)
+    end
+
+    it 'optionally takes the number of decimals' do
+      expect(energy.ideal(decimals: 5)).to eq(80.98229)
     end
   end
 
