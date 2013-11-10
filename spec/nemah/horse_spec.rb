@@ -61,7 +61,32 @@ describe Nemah do
       end
     end
 
+    describe '#walk' do
+      it 'delegates to its workload' do
+        workload_for_a_horse_told(:walk).should have_received :walk
+      end
+    end
+
+    describe '#trot_and_canter' do
+      it 'delegates to its workload' do
+        workload_for_a_horse_told(:trot_and_canter).should have_received :trot_and_canter
+      end
+    end
+
+    describe '#days_per_week' do
+      it 'delegates to its workload' do
+        workload_for_a_horse_told(:days_per_week).should have_received :days_per_week
+      end
+    end
+
     private
+
+    def workload_for_a_horse_told(method)
+      workload = double(walk: 30, trot_and_canter: 20, days_per_week: 3)
+      horse = a_horse_with(workload: workload)
+      horse.send(method)
+      workload
+    end
 
     def a_horse
       Nemah::Horse.new(default_attributes)

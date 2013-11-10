@@ -25,6 +25,19 @@ module Nemah
       weight / 100.00
     end
 
+    # Do we keep #walk, #trot_and_canter, and #days_per_week when workload is part of the public interface?
+    def walk
+      workload.walk
+    end
+
+    def trot_and_canter
+      workload.trot_and_canter
+    end
+
+    def days_per_week
+      workload.days_per_week
+    end
+
     private
 
     def assert_validity_of(*attributes)

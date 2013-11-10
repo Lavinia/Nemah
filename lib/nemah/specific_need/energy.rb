@@ -24,15 +24,15 @@ module Nemah
       end
 
       def energy_addition_for_walk
-        (0.20 * horse.weight_in_deciton * horse.workload.walk / 10.0) * days_per_week_factor
+        (0.20 * horse.weight_in_deciton * horse.walk / 10.0) * days_per_week_factor
       end
 
       def energy_addition_for_trot_and_canter
-        (1.30 * horse.weight_in_deciton * horse.workload.trot_and_canter / 10.0) * days_per_week_factor
+        (1.30 * horse.weight_in_deciton * horse.trot_and_canter / 10.0) * days_per_week_factor
       end
 
       def days_per_week_factor
-        horse.workload.days_per_week / 7.0
+        horse.days_per_week / 7.0
       end
 
       def _min
