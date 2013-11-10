@@ -10,10 +10,6 @@ module Nemah
       def max
         Float::INFINITY
       end
-
-      def horse
-        need.horse
-      end
     end
   end
 end

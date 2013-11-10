@@ -42,10 +42,6 @@ module Nemah
       def max
         ideal + 3
       end
-
-      def horse
-        need.horse
-      end
     end
   end
 end
