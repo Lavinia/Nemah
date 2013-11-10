@@ -1,11 +1,11 @@
 module Nemah
   module SpecificNeed
     class Protein < AbstractNeed
-      private
-
       def ideal
         ideal_energy * 6
       end
+
+      private
 
       def min
         0.90 * ideal

@@ -1,6 +1,10 @@
 module Nemah
   module SpecificNeed
     class Solids < AbstractNeed
+      def ideal
+        min
+      end
+
       private
 
       def min
