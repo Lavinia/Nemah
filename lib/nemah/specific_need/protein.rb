@@ -1,10 +1,6 @@
 module Nemah
   module SpecificNeed
     class Protein < AbstractNeed
-      def ideal(decimals: 2)
-        _ideal.round(decimals)
-      end
-
       private
 
       def _ideal
@@ -12,15 +8,15 @@ module Nemah
       end
 
       def min
-        0.90 * ideal
+        0.90 * _ideal
       end
 
       def max
-        1.10 * ideal
+        1.10 * _ideal
       end
 
       def ideal_energy
-        need.energy.ideal(decimals: 3)
+        need.energy.ideal(decimals: 4)
       end
     end
   end

@@ -1,11 +1,11 @@
 module Nemah
   module SpecificNeed
     class Solids < AbstractNeed
-      def ideal(decimals: 2)
-        min.round(decimals)
-      end
-
       private
+
+      def _ideal
+        min
+      end
 
       def min
         horse.weight_in_deciton * 1.50

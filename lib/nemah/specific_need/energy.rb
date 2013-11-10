@@ -1,10 +1,6 @@
 module Nemah
   module SpecificNeed
     class Energy < AbstractNeed
-      def ideal(decimals: 2)
-        _ideal.round(decimals)
-      end
-
       private
 
       def _ideal
