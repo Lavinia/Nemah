@@ -19,8 +19,8 @@ module Nemah
         _max.round(decimals)
       end
 
-      def to_rounded_range
-        min.round(2)..max.round(2)
+      def to_rounded_range(decimals: 2)
+        min(decimals: decimals)..max(decimals: decimals)
       end
 
       private

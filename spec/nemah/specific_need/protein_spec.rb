@@ -5,6 +5,10 @@ describe Nemah::SpecificNeed::Protein do
     it 'returns a range between minimum and maximum allowed amounts, rounded to two decimals' do
       expect(protein.to_rounded_range).to eq(288.63..352.77)
     end
+
+    it 'optionally takes the number of decimals' do
+      expect(protein.to_rounded_range(decimals: 0)).to eq(289..353)
+    end
   end
 
   describe '#ideal' do

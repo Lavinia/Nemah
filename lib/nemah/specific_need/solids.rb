@@ -1,6 +1,10 @@
 module Nemah
   module SpecificNeed
     class Solids < AbstractNeed
+      def max(decimals: 2)
+        _max
+      end
+
       private
 
       def _ideal

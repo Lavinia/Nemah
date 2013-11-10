@@ -5,6 +5,10 @@ describe Nemah::SpecificNeed::Solids do
     it 'returns a range between minimum and maximum allowed amounts, rounded to two decimals' do
       expect(solids.to_rounded_range).to eq(7.65..Float::INFINITY)
     end
+
+    it 'optionally takes the number of decimals' do
+      expect(solids.to_rounded_range(decimals: 0)).to eq(8..Float::INFINITY)
+    end
   end
 
   describe '#ideal' do

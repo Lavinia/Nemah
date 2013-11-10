@@ -5,6 +5,10 @@ describe Nemah::SpecificNeed::Energy do
     it 'returns a range between minimum and maximum allowed amounts, rounded to two decimals' do
       expect(energy.to_rounded_range).to eq(77.98..83.98)
     end
+
+    it 'optionally takes the number of decimals' do
+      expect(energy.to_rounded_range(decimals: 3)).to eq(77.982..83.982)
+    end
   end
 
   describe '#ideal' do
