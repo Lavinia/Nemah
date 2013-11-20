@@ -1,10 +1,1 @@
-require 'nemah/horse'
-require 'nemah/need'
-require 'nemah/version'
-require 'nemah/workload'
-require 'nemah/specific_need/abstract_need'
-require 'nemah/specific_need/calcium'
-require 'nemah/specific_need/energy'
-require 'nemah/specific_need/protein'
-require 'nemah/specific_need/selenium'
-require 'nemah/specific_need/solids'
+Dir[File.join(File.dirname(__FILE__), 'nemah', '**', '*.rb')].sort.each { |file| require file }
