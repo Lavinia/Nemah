@@ -48,7 +48,8 @@ describe Nemah::SpecificNeed::Energy do
   end
 
   def need
-    horse = double('horse', stallion?: true, weight: 600, weight_in_deciton: 6.0, feedability: :normal, walk: 30, trot_and_canter: 20, days_per_week: 4)
+    workload = double('workload', walk: 30, trot_and_canter: 20, days_per_week: 4)
+    horse = double('horse', stallion?: true, weight: 600, weight_in_deciton: 6.0, feedability: :normal, workload: workload)
     double('need', horse: horse)
   end
 end
