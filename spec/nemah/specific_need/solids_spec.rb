@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Nemah::SpecificNeed::Solids do
+  it_behaves_like 'a specific need'
+
   describe '#to_rounded_range' do
     it 'returns a range between minimum and maximum allowed amounts, rounded to two decimals' do
       expect(solids.to_rounded_range).to eq(7.65..Float::INFINITY)
