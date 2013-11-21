@@ -3,6 +3,12 @@ require 'spec_helper'
 describe Nemah::SpecificNeed::Energy do
   it_behaves_like 'a specific need'
 
+  describe '#workload' do
+    it 'returns the workload portion of the energy need' do
+      expect(energy).to respond_to(:workload)
+    end
+  end
+
   describe '#to_rounded_range' do
     it 'returns a range between minimum and maximum allowed amounts, rounded to two decimals' do
       expect(energy.to_rounded_range).to eq(77.98..83.98)
