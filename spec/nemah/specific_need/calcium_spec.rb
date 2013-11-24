@@ -14,12 +14,32 @@ describe Nemah::SpecificNeed::Calcium do
       expect(calcium.to_rounded_range(decimals: 0)).to eq(21..Float::INFINITY)
     end
 
-    it 'adjusts for a light workload' do
-      light_workload_energy_need = double('energy', :for_maintenance => 40.0, :for_workload => 10.0)
-      my_need = double('need', :horse => double(:weight_in_deciton => 5.3), :energy => light_workload_energy_need)
-      my_calcium = Nemah::SpecificNeed::Calcium.new(my_need)
+    context 'with a workload' do
+      def mineral_for_horse_with_workload_energy_need(workload)
+        workload_energy_need = double('energy', :for_maintenance => 40.0, :for_workload => workload)
+        fake_need = double('need', :horse => double(:weight_in_deciton => 5.3), :energy => workload_energy_need)
+        Nemah::SpecificNeed::Calcium.new(fake_need)
+      end
 
-      expect(my_calcium.to_rounded_range).to eq(31.8..Float::INFINITY)
+      it 'adjusts for a light workload' do
+        mineral = mineral_for_horse_with_workload_energy_need(10.0)
+        expect(mineral.to_rounded_range).to eq(31.8..Float::INFINITY)
+      end
+
+      it 'adjusts for a medium workload' do
+        mineral = mineral_for_horse_with_workload_energy_need(12.0)
+        expect(mineral.to_rounded_range).to eq(37.10..Float::INFINITY)
+      end
+
+      it 'adjusts for a hard workload' do
+        mineral = mineral_for_horse_with_workload_energy_need(20.0)
+        expect(mineral.to_rounded_range).to eq(42.40..Float::INFINITY)
+      end
+
+      it 'adjusts for a very hard workload' do
+        mineral = mineral_for_horse_with_workload_energy_need(30.0)
+        expect(mineral.to_rounded_range).to eq(42.40..Float::INFINITY)
+      end
     end
   end
 

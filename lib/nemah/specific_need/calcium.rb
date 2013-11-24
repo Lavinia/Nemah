@@ -22,8 +22,14 @@ module Nemah
       def energy_and_workload_factor
         if workload_energy_quota == 0
           4.0
-        elsif workload_energy_quota < 30
+        elsif workload_energy_quota < 0.30
           6.0
+        elsif workload_energy_quota < 0.50
+          7.0
+        elsif workload_energy_quota < 0.75
+          8.0
+        else
+          8.0
         end
       end
 
