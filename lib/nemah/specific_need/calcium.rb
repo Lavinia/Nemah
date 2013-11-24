@@ -28,8 +28,8 @@ module Nemah
       end
 
       def workload_energy_quota
-        maintenance_energy = need.energy.ideal - need.energy.workload
-        need.energy.workload.to_f / maintenance_energy.to_f
+        maintenance_energy = need.energy.ideal - need.energy.for_workload
+        need.energy.for_workload.to_f / maintenance_energy.to_f
       end
     end
   end

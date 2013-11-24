@@ -3,9 +3,9 @@ require 'spec_helper'
 describe Nemah::SpecificNeed::Energy do
   it_behaves_like 'a specific need'
 
-  describe '#workload' do
+  describe '#for_workload' do
     it 'returns the workload portion of the energy need' do
-      expect(energy).to respond_to(:workload)
+      expect(energy.for_workload).to eq(10.97)
     end
   end
 
