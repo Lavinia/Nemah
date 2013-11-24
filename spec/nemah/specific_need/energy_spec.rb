@@ -9,6 +9,12 @@ describe Nemah::SpecificNeed::Energy do
     end
   end
 
+  describe '#for_maintenance' do
+    it 'returns the maintenance energy need' do
+      expect(energy.for_maintenance).to eq(70.01)
+    end
+  end
+
   describe '#to_rounded_range' do
     it 'returns a range between minimum and maximum allowed amounts, rounded to two decimals' do
       expect(energy.to_rounded_range).to eq(77.98..83.98)

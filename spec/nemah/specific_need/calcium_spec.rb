@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Nemah::SpecificNeed::Calcium do
   it_behaves_like 'a specific need'
 
-  let(:energy) { double('energy', :ideal => 50.0, :for_workload => 0.0) }
+  let(:energy) { double('energy', :for_maintenance => 50.0, :for_workload => 0.0) }
 
   describe '#to_rounded_range' do
     it 'returns a range between minimum and maximum allowed amounts, rounded to two decimals' do
@@ -15,7 +15,7 @@ describe Nemah::SpecificNeed::Calcium do
     end
 
     it 'adjusts for a light workload' do
-      light_workload_energy_need = double('energy', :ideal => 50.0, :for_workload => 10.0)
+      light_workload_energy_need = double('energy', :for_maintenance => 40.0, :for_workload => 10.0)
       my_need = double('need', :horse => double(:weight_in_deciton => 5.3), :energy => light_workload_energy_need)
       my_calcium = Nemah::SpecificNeed::Calcium.new(my_need)
 

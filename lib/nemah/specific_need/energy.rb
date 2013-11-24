@@ -1,6 +1,10 @@
 module Nemah
   module SpecificNeed
     class Energy < AbstractNeed
+      def for_maintenance(decimals: 2)
+        (ideal - workload_energy).round(decimals)
+      end
+
       def for_workload(decimals: 2)
         workload_energy.round(decimals)
       end
