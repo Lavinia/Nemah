@@ -27,6 +27,10 @@ module Nemah
         need.energy
       end
 
+      def factor_table
+        raise NotImplementedError, 'factor_table must return an instance of FactorTable'
+      end
+
       class FactorTable
         attr_reader :no_work, :below_30, :below_50, :below_75, :above_75
 
