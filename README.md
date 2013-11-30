@@ -1,8 +1,6 @@
-# Nemah
+# Nemah [![Build Status](https://secure.travis-ci.org/Lavinia/Nemah.png)](http://travis-ci.org/Lavinia/Nemah) [![Code Climate](https://codeclimate.com/github/Lavinia/Nemah.png)](https://codeclimate.com/github/Lavinia/Nemah)
 
 Nemah is a library for calculating the proper amount of fodder for your horse. In real life, Nemah is an [Arabian horse](http://en.wikipedia.org/wiki/Arabian_horse) with an immense appetite.
-
-## Build Status [![Build Status](https://secure.travis-ci.org/Lavinia/Nemah.png)](http://travis-ci.org/Lavinia/Nemah)
 
 ## Requirements
 
