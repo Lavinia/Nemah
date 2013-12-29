@@ -5,6 +5,10 @@ module Nemah
         _max
       end
 
+      def unit
+        :kg
+      end
+
       private
 
       def _ideal

@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Nemah::SpecificNeed::Selenium do
-  it_behaves_like 'a specific need'
+  it_behaves_like 'a specific need' do
+    let(:unit) { :mg }
+  end
 
   describe '#to_rounded_range' do
     it 'returns a range between minimum and maximum allowed amounts, rounded to two decimals' do

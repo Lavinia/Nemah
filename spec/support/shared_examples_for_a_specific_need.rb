@@ -7,4 +7,6 @@ shared_examples_for 'a specific need' do
     it { should respond_to(:min) }
     it { should respond_to(:max) }
   end
+
+  specify { expect(need.unit).to eq unit }
 end

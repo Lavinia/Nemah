@@ -9,6 +9,10 @@ module Nemah
         workload_energy.round(decimals)
       end
 
+      def unit
+        :MJ
+      end
+
       private
 
       def _ideal

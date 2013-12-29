@@ -23,6 +23,10 @@ module Nemah
         min(decimals: decimals)..max(decimals: decimals)
       end
 
+      def unit
+        :g
+      end
+
       private
 
       def _ideal

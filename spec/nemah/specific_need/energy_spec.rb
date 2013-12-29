@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Nemah::SpecificNeed::Energy do
-  it_behaves_like 'a specific need'
+  it_behaves_like 'a specific need' do
+    let(:unit) { :MJ }
+  end
 
   describe '#for_workload' do
     it 'returns the workload portion of the energy need' do

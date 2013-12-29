@@ -1,6 +1,10 @@
 module Nemah
   module SpecificNeed
     class Selenium < AbstractNeed
+      def unit
+        :mg
+      end
+
       private
 
       def _ideal
