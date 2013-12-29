@@ -14,7 +14,7 @@ module Nemah
       @name = attributes.fetch(:name, '')
       @feedability = attributes.fetch(:feedability, :normal)
       @workload = attributes.fetch(:workload, Workload.new)
-      assert_validity_of(:feedability, :gender, :weight)
+      HorseValidator.new(self).assert_validity_of(:feedability, :gender, :weight)
     end
 
     def stallion?
@@ -27,43 +27,53 @@ module Nemah
 
     private
 
-    def assert_validity_of(*attributes)
-      attributes.each { |attribute| assert_valid(attribute) }
-    end
-
-    def assert_valid(attribute)
-      unless allowed_values_for(attribute).include? send(attribute)
-        raise ArgumentError, "#{send(attribute).inspect} is not an allowed #{attribute}"
+    class HorseValidator
+      def initialize(horse)
+        @horse = horse
       end
-    end
 
-    def allowed_values_for(attribute)
-      case attribute
-      when :gender then allowed_genders
-      when :feedability then allowed_feedabilities
-      when :weight then PositiveWeight.new
-      else
-        Everything.new
+      def assert_validity_of(*attributes)
+        attributes.each { |attribute| assert_valid(attribute) }
       end
-    end
 
-    def allowed_feedabilities
-      [:easy, :normal, :hard]
-    end
+      private
 
-    def allowed_genders
-      [:gelding, :mare, :stallion]
-    end
+      attr_reader :horse
 
-    class PositiveWeight
-      def include?(weight)
-        weight >= 0
+      def assert_valid(attribute)
+        unless allowed_values_for(attribute).include? horse.send(attribute)
+          raise ArgumentError, "#{horse.send(attribute).inspect} is not an allowed #{attribute}"
+        end
       end
-    end
 
-    class Everything
-      def include?(_)
-        true
+      def allowed_values_for(attribute)
+        case attribute
+        when :gender then allowed_genders
+        when :feedability then allowed_feedabilities
+        when :weight then PositiveWeight.new
+        else
+          Everything.new
+        end
+      end
+
+      def allowed_feedabilities
+        [:easy, :normal, :hard]
+      end
+
+      def allowed_genders
+        [:gelding, :mare, :stallion]
+      end
+
+      class PositiveWeight
+        def include?(weight)
+          weight >= 0
+        end
+      end
+
+      class Everything
+        def include?(_)
+          true
+        end
       end
     end
   end
