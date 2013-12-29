@@ -29,6 +29,8 @@ Or install it yourself as:
 
 ### Yet to be implemented
 
+* Microminerals apart from selenium
+* Balances
 * Fodder
 * Rations
 * Given a horse, its needs, and a list of fodder, calculate suitable rations.
