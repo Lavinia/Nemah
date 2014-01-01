@@ -43,11 +43,37 @@ describe Nemah::Need do
     end
   end
 
-  describe 'calculating selenium' do
+
+  describe 'calculating calcium' do
     it 'for an arabian princess' do
-      expect(need_for_nemah.selenium.to_rounded_range).to eq(0.9..22.5)
+      expect(need_for_nemah.calcium.to_rounded_range).to eq(18.00..Float::INFINITY)
     end
   end
+
+  describe 'calculating magnesium' do
+    it 'for an arabian princess' do
+      expect(need_for_nemah.magnesium.to_rounded_range).to eq(6.75..Float::INFINITY)
+    end
+  end
+
+  describe 'calculating phosphor' do
+    it 'for an arabian princess' do
+      expect(need_for_nemah.phosphor.to_rounded_range).to eq(12.60..Float::INFINITY)
+    end
+  end
+
+  describe 'calculating selenium' do
+    it 'for an arabian princess' do
+      expect(need_for_nemah.selenium.to_rounded_range).to eq(0.90..22.50)
+    end
+  end
+
+  describe 'calculating salt' do
+    it 'for an arabian princess' do
+      expect(need_for_nemah.salt.to_rounded_range).to eq(22.95..Float::INFINITY)
+    end
+  end
+
 
   private
 
