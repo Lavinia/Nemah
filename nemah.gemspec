@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['forgetmenotox@notingham.se']
   spec.description   = 'Nemah is a library for calculating the proper amount of fodder for your horse.'
   spec.summary       = 'Horse fodder calculations library.'
-  spec.homepage      = 'https://github.com/Lavinia/nemah'
+  spec.homepage      = 'https://github.com/Lavinia/Nemah'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)
