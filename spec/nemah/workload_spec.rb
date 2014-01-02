@@ -13,6 +13,14 @@ describe Nemah::Workload do
     expect(workload_with(days_per_week: 3).days_per_week).to eq(3)
   end
 
+  it 'does not allow days_per_week to be greater than 7' do
+    expect { workload_with(days_per_week: 10) }.to raise_error(ArgumentError, 'days_per_week must be between 0 and 7')
+  end
+
+  it 'does not allow days_per_week to be less than 0' do
+    expect { workload_with(days_per_week: -2) }.to raise_error(ArgumentError, 'days_per_week must be between 0 and 7')
+  end
+
   it 'is equal to another workload with the same amount of work' do
     workload = workload_with(walk: 30, trot_and_canter: 5, days_per_week: 3)
     another_workload = workload_with(walk: 30, trot_and_canter: 5, days_per_week: 3)

@@ -8,6 +8,7 @@ module Nemah
       attributes.each do |attribute|
         instance_variable_set "@#{attribute}", args.fetch(attribute, 0)
       end
+      assert_valid_days_per_week
     end
 
     def ==(other)
@@ -20,6 +21,10 @@ module Nemah
 
     def attributes
       ATTRIBUTES.dup
+    end
+
+    def assert_valid_days_per_week
+      raise ArgumentError.new('days_per_week must be between 0 and 7') unless (0..7).include? days_per_week
     end
   end
 end
