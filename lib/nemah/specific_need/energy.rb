@@ -48,7 +48,7 @@ module Nemah
       end
 
       def _min
-        _ideal - 3
+        [_ideal - 3, 0].max
       end
 
       def _max

@@ -45,6 +45,11 @@ describe Nemah::SpecificNeed::Energy do
     it 'optionally takes the number of decimals' do
       expect(energy.min(decimals: 4)).to eq(77.9823)
     end
+
+    it 'cannot be less than 0' do
+      feather_weight_horse_energy = Nemah::SpecificNeed::Energy.new(need(weight: 0.1))
+      expect(feather_weight_horse_energy.min).to eq(0)
+    end
   end
 
   describe '#max' do
@@ -63,9 +68,9 @@ describe Nemah::SpecificNeed::Energy do
     Nemah::SpecificNeed::Energy.new(need)
   end
 
-  def need
+  def need(weight: 600)
     workload = double('workload', walk: 30, trot_and_canter: 20, days_per_week: 4)
-    horse = double('horse', stallion?: true, weight: 600, weight_in_deciton: 6.0, feedability: :normal, workload: workload)
+    horse = double('horse', stallion?: true, weight: weight, weight_in_deciton: weight / 100.0, feedability: :normal, workload: workload)
     double('need', horse: horse)
   end
 end
