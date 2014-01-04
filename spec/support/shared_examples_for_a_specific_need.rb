@@ -1,5 +1,5 @@
 shared_examples_for 'a specific need' do
-  subject(:need) { described_class.new(double('need for a horse')) }
+  subject(:specific_need) { described_class.new(double('need for a horse')) }
 
   describe 'the common interface' do
     it { should respond_to(:to_rounded_range) }
@@ -8,5 +8,5 @@ shared_examples_for 'a specific need' do
     it { should respond_to(:max) }
   end
 
-  specify { expect(need.unit).to eq unit }
+  specify { expect(specific_need.unit).to eq unit }
 end
