@@ -80,6 +80,21 @@ describe Nemah::FodderList do
       expect(fodder_list.amount_of(fodder)).to eq 10.0
     end
   end
+
+  describe '#each' do
+    subject(:fodder_list) { build_fodder_list(fodder => 5.0) }
+
+    it 'returns an enumerator for the list when not given a block' do
+      expect(fodder_list.each.next).to eq [fodder, 5.0]
+    end
+
+    it 'yields the fodder and amount pairs in the list when given a block' do
+      yielded_fodder_and_amount = :not_set
+      fodder_list.each { |fodder_and_amount| yielded_fodder_and_amount = fodder_and_amount  }
+
+      expect(yielded_fodder_and_amount).to eq [fodder, 5.0]
+    end
+  end
 end
 
 def build_fodder_list(fodders = {})

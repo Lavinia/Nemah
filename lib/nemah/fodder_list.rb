@@ -26,6 +26,10 @@ module Nemah
       fodders.dup
     end
 
+    def each(&block)
+      fodders.each &block
+    end
+
     private
 
     attr_accessor :fodders
