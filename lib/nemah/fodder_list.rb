@@ -1,7 +1,7 @@
 module Nemah
   class FodderList
     def initialize(fodders = {})
-      self.fodders = fodders
+      self.fodders = Hash.new(0).merge fodders
     end
 
     def count
@@ -9,21 +9,29 @@ module Nemah
     end
 
     def amount_of(fodder)
-      fodders.fetch(fodder, 0)
+      fodders[fodder]
     end
 
-    def add(fodder, amount)
-      fodders[fodder] = amount
+    def add(fodder, amount = 0)
+      fodders[fodder] += amount
       self
     end
 
-    def remove(fodder)
-      fodders.delete_if { |key, _| key == fodder }
+    def remove(fodder, amount = :not_specified)
+      (amount == :not_specified) ? remove_fodder(fodder) : reduce_fodder(fodder, amount)
       self
     end
 
     private
 
     attr_accessor :fodders
+
+    def reduce_fodder(fodder, amount)
+      fodders[fodder] = [fodders[fodder] - amount, 0].max
+    end
+
+    def remove_fodder(fodder)
+      fodders.delete_if { |key, _| key == fodder }
+    end
   end
 end
