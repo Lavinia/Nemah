@@ -22,6 +22,10 @@ module Nemah
       self
     end
 
+    def to_h
+      fodders.dup
+    end
+
     private
 
     attr_accessor :fodders

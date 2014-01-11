@@ -66,6 +66,20 @@ describe Nemah::FodderList do
       expect(fodder_list.remove fodder).to eq fodder_list
     end
   end
+
+  describe '#to_h' do
+    let(:fodders) { { fodder => 10.0 } }
+    subject(:fodder_list) { build_fodder_list(fodders) }
+
+    it 'returns a hash representation of the list' do
+      expect(fodder_list.to_h).to eq fodders
+    end
+
+    it 'changing the hash does not change the fodder list' do
+      fodder_list.to_h[fodder] = 0
+      expect(fodder_list.amount_of(fodder)).to eq 10.0
+    end
+  end
 end
 
 def build_fodder_list(fodders = {})
