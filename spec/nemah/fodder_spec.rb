@@ -1,5 +1,21 @@
 require 'spec_helper'
 
+shared_examples_for 'a nutrient' do
+  it 'returns 0.0 by default' do
+    expect(build_fodder.send(nutrient).value).to eq 0.0
+  end
+
+  it 'returns the amount of the nutrient' do
+    fodder = build_fodder(nutrient => 1.5)
+    expect(fodder.send(nutrient).value).to eq 1.5
+  end
+
+  it 'returns the nutrient unit' do
+    fodder = build_fodder(nutrient => 1.5)
+    expect(fodder.send(nutrient).unit).to eq unit
+  end
+end
+
 describe Nemah::Fodder do
   def build_fodder(nutrients = {})
     Nemah::Fodder.new('hay', nutrients)
@@ -10,90 +26,42 @@ describe Nemah::Fodder do
   end
 
   describe '#calcium' do
-    it 'returns 0.0 by default' do
-      expect(build_fodder.calcium.value).to eq 0.0
-    end
-
-    it 'returns the amount of calcium' do
-      fodder = build_fodder(calcium: 1.5)
-      expect(fodder.calcium.value).to eq 1.5
-    end
-
-    it 'returns the amount of calcium in grams' do
-      fodder = build_fodder(calcium: 1.5)
-      expect(fodder.calcium.unit).to eq :g
+    it_behaves_like 'a nutrient' do
+      let(:nutrient) { :calcium }
+      let(:unit) { :g }
     end
   end
 
   describe '#selenium' do
-    it 'returns 0.0 by default' do
-      expect(build_fodder.selenium.value).to eq 0.0
-    end
-
-    it 'returns the amount of selenium' do
-      fodder = build_fodder(selenium: 0.6)
-      expect(fodder.selenium.value).to eq 0.6
-    end
-
-    it 'returns the amount of selenium in milligrams' do
-      fodder = build_fodder(selenium: 0.6)
-      expect(fodder.selenium.unit).to eq :mg
+    it_behaves_like 'a nutrient' do
+      let(:nutrient) { :selenium }
+      let(:unit) { :mg }
     end
   end
 
-
-
   describe '#energy' do
-    it 'returns 0.0 by default' do
-      expect(build_fodder.energy.value).to eq 0.0
-    end
-
-    it 'returns the amount of energy' do
-      fodder = build_fodder(energy: 11.2)
-      expect(fodder.energy.value).to eq 11.2
-    end
-
-    it 'returns the amount of energy in MJ' do
-      fodder = build_fodder(energy: 11.2)
-      expect(fodder.energy.unit).to eq :MJ
+    it_behaves_like 'a nutrient' do
+      let(:nutrient) { :energy }
+      let(:unit) { :MJ }
     end
   end
 
   describe '#protein' do
-    it 'returns 0.0 by default' do
-      expect(build_fodder.protein.value).to eq 0.0
-    end
-
-    it 'returns the amount of protein' do
-      fodder = build_fodder(protein: 34)
-      expect(fodder.protein.value).to eq 34
-    end
-
-    it 'returns the amount of protein in grams' do
-      fodder = build_fodder(protein: 28.6)
-      expect(fodder.protein.unit).to eq :g
+    it_behaves_like 'a nutrient' do
+      let(:nutrient) { :protein }
+      let(:unit) { :g }
     end
   end
 
   describe '#solids' do
-    it 'returns 0.0 by default' do
-      expect(build_fodder.solids.value).to eq 0.0
+    it_behaves_like 'a nutrient' do
+      let(:nutrient) { :solids }
+      let(:unit) { :percent_per_kg }
     end
 
-    context 'with a specified amount' do
-      subject(:fodder) { build_fodder(solids: 67.5) }
-
-      it 'returns the amount of solids' do
-        expect(fodder.solids.value).to eq 67.5
-      end
-
-      it 'returns the amount of solids in percent per kilogram' do
-        expect(fodder.solids.unit).to eq :percent_per_kg
-      end
-
-      it 'returns the amount of solids in kilograms if specified' do
-        expect(fodder.solids.value(:kg)).to eq 0.675
-      end
+    it 'returns the amount of solids in kilograms if specified' do
+      fodder = build_fodder(solids: 67.5)
+      expect(fodder.solids.value(:kg)).to eq 0.675
     end
   end
 end
