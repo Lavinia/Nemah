@@ -1,17 +1,29 @@
 module Nemah
   class Fodder
-    attr_reader :name, :calcium, :energy, :magnesium, :phosphor, :protein, :salt, :selenium, :solids
+    KNOWN_NUTRIENTS = {
+      calcium: :g,
+      energy: :MJ,
+      magnesium: :g,
+      phosphor: :g,
+      protein: :g,
+      salt: :g,
+      selenium: :mg,
+      solids: :percent_per_kg
+    }
+
+    attr_reader :name, *KNOWN_NUTRIENTS.keys
 
     def initialize(name, nutrients = {})
       @name = name
-      @calcium = Nemah::Amount.new(nutrients.fetch(:calcium, 0.0), :g)
-      @energy = Nemah::Amount.new(nutrients.fetch(:energy, 0.0), :MJ)
-      @magnesium = Nemah::Amount.new(nutrients.fetch(:magnesium, 0.0), :g)
-      @phosphor = Nemah::Amount.new(nutrients.fetch(:phosphor, 0.0), :g)
-      @protein = Nemah::Amount.new(nutrients.fetch(:protein, 0.0), :g)
-      @salt = Nemah::Amount.new(nutrients.fetch(:salt, 0.0), :g)
-      @selenium = Nemah::Amount.new(nutrients.fetch(:selenium, 0.0), :mg)
-      @solids = Nemah::Amount.new(nutrients.fetch(:solids, 0.0), :percent_per_kg)
+      set_nutrients nutrients
+    end
+
+    private
+
+    def set_nutrients(nutrients)
+      KNOWN_NUTRIENTS.each do |nutrient, unit|
+        instance_variable_set "@#{nutrient}", Nemah::Amount.new(nutrients.fetch(nutrient, 0.0), unit)
+      end
     end
   end
 end
