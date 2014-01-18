@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Nemah::FodderList do
-  let(:fodder) { double('hay') }
+  let(:fodder) { Nemah::Fodder.new('hay') }
 
   it 'contains no fodders by default' do
     fodder_list = build_fodder_list
