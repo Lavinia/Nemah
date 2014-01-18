@@ -32,13 +32,6 @@ describe Nemah::Fodder do
     end
   end
 
-  describe '#selenium' do
-    it_behaves_like 'a nutrient' do
-      let(:nutrient) { :selenium }
-      let(:unit) { :mg }
-    end
-  end
-
   describe '#energy' do
     it_behaves_like 'a nutrient' do
       let(:nutrient) { :energy }
@@ -46,10 +39,38 @@ describe Nemah::Fodder do
     end
   end
 
+  describe '#magnesium' do
+    it_behaves_like 'a nutrient' do
+      let(:nutrient) { :magnesium }
+      let(:unit) { :g }
+    end
+  end
+
+  describe '#phosphor' do
+    it_behaves_like 'a nutrient' do
+      let(:nutrient) { :phosphor }
+      let(:unit) { :g }
+    end
+  end
+
   describe '#protein' do
     it_behaves_like 'a nutrient' do
       let(:nutrient) { :protein }
       let(:unit) { :g }
+    end
+  end
+
+  describe '#salt' do
+    it_behaves_like 'a nutrient' do
+      let(:nutrient) { :salt }
+      let(:unit) { :g }
+    end
+  end
+
+  describe '#selenium' do
+    it_behaves_like 'a nutrient' do
+      let(:nutrient) { :selenium }
+      let(:unit) { :mg }
     end
   end
 
