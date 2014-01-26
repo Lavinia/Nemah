@@ -8,5 +8,5 @@ platforms :rbx do
 end
 
 group :development, :test do
-  gem 'byebug', '~> 2.5', :platforms => :mri
+  gem 'byebug', '~> 2.5', platforms: :mri
 end
