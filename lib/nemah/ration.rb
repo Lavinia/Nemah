@@ -7,12 +7,32 @@ module Nemah
       @need = need
     end
 
+    def enough_calcium?
+      enough?(:calcium)
+    end
+
     def enough_energy?
       enough?(:energy)
     end
 
+    def enough_magnesium?
+      enough?(:magnesium)
+    end
+
+    def enough_phosphor?
+      enough?(:phosphor)
+    end
+
     def enough_protein?
       enough?(:protein)
+    end
+
+    def enough_salt?
+      enough?(:salt)
+    end
+
+    def enough_selenium?
+      enough?(:selenium)
     end
 
     def enough_solids?

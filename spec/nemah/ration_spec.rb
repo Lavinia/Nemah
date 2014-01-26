@@ -18,6 +18,15 @@ shared_examples_for 'a nutrient requirement' do
 end
 
 describe Nemah::Ration do
+  describe '#enough_calcium?' do
+    it_behaves_like 'a nutrient requirement' do
+      let(:nutrient) { :calcium }
+      let(:nutrient_min) { 35.6 }
+      let(:nutrient_unit) { :g }
+      let(:fodders) { { Nemah::Fodder.new('hay', { nutrient => 3.56 }) => 10 } }
+    end
+  end
+
   describe '#enough_energy?' do
     it_behaves_like 'a nutrient requirement' do
       let(:nutrient) { :energy }
@@ -27,12 +36,48 @@ describe Nemah::Ration do
     end
   end
 
+  describe '#enough_magnesium?' do
+    it_behaves_like 'a nutrient requirement' do
+      let(:nutrient) { :magnesium }
+      let(:nutrient_min) { 25 }
+      let(:nutrient_unit) { :g }
+      let(:fodders) { { Nemah::Fodder.new('hay', { nutrient => 2.5 }) => 10 } }
+    end
+  end
+
+  describe '#enough_phosphor?' do
+    it_behaves_like 'a nutrient requirement' do
+      let(:nutrient) { :phosphor }
+      let(:nutrient_min) { 24.4 }
+      let(:nutrient_unit) { :g }
+      let(:fodders) { { Nemah::Fodder.new('hay', { nutrient => 2.44 }) => 10 } }
+    end
+  end
+
   describe '#enough_protein?' do
     it_behaves_like 'a nutrient requirement' do
       let(:nutrient) { :protein }
       let(:nutrient_min) { 330 }
       let(:nutrient_unit) { :g }
       let(:fodders) { { Nemah::Fodder.new('hay', { nutrient => 33 }) => 10 } }
+    end
+  end
+
+  describe '#enough_salt?' do
+    it_behaves_like 'a nutrient requirement' do
+      let(:nutrient) { :salt }
+      let(:nutrient_min) { 7.8 }
+      let(:nutrient_unit) { :g }
+      let(:fodders) { { Nemah::Fodder.new('hay', { nutrient => 0.78 }) => 10 } }
+    end
+  end
+
+  describe '#enough_selenium?' do
+    it_behaves_like 'a nutrient requirement' do
+      let(:nutrient) { :selenium }
+      let(:nutrient_min) { 12.1 }
+      let(:nutrient_unit) { :mg }
+      let(:fodders) { { Nemah::Fodder.new('hay', { nutrient => 1.21 }) => 10 } }
     end
   end
 
