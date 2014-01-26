@@ -4,7 +4,9 @@ source 'https://rubygems.org'
 gemspec
 
 platforms :rbx do
-  gem 'racc'
   gem 'rubysl', '~> 2.0'
-  gem 'psych'
+end
+
+group :development, :test do
+  gem 'byebug', '~> 2.5', :platforms => :mri
 end
