@@ -7,7 +7,7 @@ module Nemah
       @need = need
     end
 
-    Nemah::Fodder::KNOWN_NUTRIENTS.keys.each do |nutrient|        # def enough_nutrient?
+    Nemah::Nutrients.names.each do |nutrient|                     # def enough_nutrient?
       define_method("enough_#{nutrient}?") { enough?(nutrient) }  #   enough?(:nutrient)
     end                                                           # end
 

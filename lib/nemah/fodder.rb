@@ -1,17 +1,6 @@
 module Nemah
   class Fodder
-    KNOWN_NUTRIENTS = {
-      calcium: :g,
-      energy: :MJ,
-      magnesium: :g,
-      phosphor: :g,
-      protein: :g,
-      salt: :g,
-      selenium: :mg,
-      solids: :percent_per_kg
-    }
-
-    attr_reader :name, *KNOWN_NUTRIENTS.keys
+    attr_reader :name, *Nemah::Nutrients.names
 
     def initialize(name, nutrients = {})
       @name = name
@@ -21,7 +10,7 @@ module Nemah
     private
 
     def set_nutrients(nutrients)
-      KNOWN_NUTRIENTS.each do |nutrient, unit|
+      Nemah::Nutrients.default_input_unit_mappings.each do |nutrient, unit|
         instance_variable_set "@#{nutrient}", Nemah::Amount.new(nutrients.fetch(nutrient, 0.0), unit)
       end
     end
