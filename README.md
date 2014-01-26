@@ -4,7 +4,7 @@ Nemah is a library for calculating the proper amount of fodder for your horse. I
 
 ## Requirements
 
-Given that Nemah is an Arabian princess, she wants as many rubies as possible, but no fewer than 2.0.
+Given that Nemah is an Arabian princess, she wants as many rubies as possible, but no fewer than 2.0. Thus MRI and JRuby are supported, whereas Rubinius needs to [add support for keyword arguments](https://github.com/rubinius/rubinius/issues/2669).
 
 ## Installation.
 
@@ -31,8 +31,7 @@ Or install it yourself as:
 
 * Microminerals apart from selenium
 * Balances
-* Fodder
-* Rations
+* Rations (_in progress_)
 * Given a horse, its needs, and a list of fodder, calculate suitable rations.
 
 ## Contributing
