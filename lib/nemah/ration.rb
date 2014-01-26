@@ -8,24 +8,24 @@ module Nemah
     end
 
     def enough_energy?
-      given_energy = fodder_list.each.inject(0) do |total_energy, (fodder, amount)|
-        total_energy += amount * fodder.energy.value(need.energy.unit)
-      end
-      need.energy.min <= given_energy
+      enough?(:energy)
     end
 
     def enough_protein?
-      given_protein = fodder_list.each.inject(0) do |total_protein, (fodder, amount)|
-        total_protein += amount * fodder.protein.value(need.protein.unit)
-      end
-      need.protein.min <= given_protein
+      enough?(:protein)
     end
 
     def enough_solids?
-      given_solids = fodder_list.each.inject(0) do |total_solids, (fodder, amount)|
-        total_solids += amount * fodder.solids.value(need.solids.unit)
+      enough?(:solids)
+    end
+
+    private
+
+    def enough?(nutrient)
+      given_nutrient = fodder_list.each.inject(0) do |total, (fodder, amount)|
+        total += amount * fodder.public_send(nutrient).value(need.public_send(nutrient).unit)
       end
-      need.solids.min <= given_solids
+      need.public_send(nutrient).min <= given_nutrient
     end
   end
 end
