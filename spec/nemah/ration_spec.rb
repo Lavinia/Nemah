@@ -90,29 +90,43 @@ describe Nemah::Ration do
     end
   end
 
+  shared_examples_for 'a balance' do
+    let(:need) do
+      double('fake_need',
+        first_nutrient.name => double(first_nutrient.name.to_s, unit: first_nutrient.unit),
+        second_nutrient.name => double(second_nutrient.name.to_s, unit: second_nutrient.unit))
+    end
+
+    it 'returns true when the ratio is the lowest allowed' do
+      expect(ration(allowed.first).public_send("#{balance}_in_balance?")).to be_true
+    end
+
+    it 'returns true when the ratio is the highest allowed' do
+      expect(ration(allowed.last).public_send("#{balance}_in_balance?")).to be_true
+    end
+
+    it 'returns false when the ratio is below the allowed range' do
+      expect(ration(allowed.first - 0.01).public_send("#{balance}_in_balance?")).to be_false
+    end
+
+    it 'returns false when the ratio is above the allowed range' do
+      expect(ration(allowed.last + 0.01).public_send("#{balance}_in_balance?")).to be_false
+    end
+
+    private
+
+    def ration(value)
+      fodder_list = Nemah::FodderList.new({ Nemah::Fodder.new('hay', { first_nutrient.name => value, second_nutrient.name => 1 }) => 5 })
+      Nemah::Ration.new(need, fodder_list)
+    end
+  end
+
   describe '#calcium_phosphor_in_balance?' do
-    it 'returns true when the ratio of calcium to phosphor is between 1.2 to 1.8' do
-      need = double('fake_need', calcium: double('calcium', unit: :mg), phosphor: double('phosphor', unit: :mg))
-      fodder_list = Nemah::FodderList.new({ Nemah::Fodder.new('hay', { :calcium => 1.2, :phosphor => 1 }) => 5 })
-      ration = Nemah::Ration.new(need, fodder_list)
-
-      expect(ration.calcium_phosphor_in_balance?).to be_true
-    end
-
-    it 'returns false when the ratio of calcium to phosphor is below 1.2' do
-      need = double('fake_need', calcium: double('calcium', unit: :mg), phosphor: double('phosphor', unit: :mg))
-      fodder_list = Nemah::FodderList.new({ Nemah::Fodder.new('hay', { :calcium => 1.19, :phosphor => 1 }) => 10 })
-      ration = Nemah::Ration.new(need, fodder_list)
-
-      expect(ration.calcium_phosphor_in_balance?).to be_false
-    end
-
-    it 'returns false when the ratio of calcium to phosphor is above 1.8' do
-      need = double('fake_need', calcium: double('calcium', unit: :mg), phosphor: double('phosphor', unit: :mg))
-      fodder_list = Nemah::FodderList.new({ Nemah::Fodder.new('hay', { :calcium => 1.9, :phosphor => 1 }) => 5 })
-      ration = Nemah::Ration.new(need, fodder_list)
-
-      expect(ration.calcium_phosphor_in_balance?).to be_false
+    it_behaves_like 'a balance' do
+      let(:balance) { :calcium_phosphor }
+      let(:first_nutrient) { double(name: :calcium, unit: :g) }
+      let(:second_nutrient) { double(name: :phosphor, unit: :g) }
+      let(:allowed) { 1.2..1.8 }
     end
   end
 
@@ -122,7 +136,7 @@ describe Nemah::Ration do
       fodder_list = Nemah::FodderList.new({ Nemah::Fodder.new('hay', { :calcium => 2.6, :phosphor => 2.0 }) => 5 })
       ration = Nemah::Ration.new(need, fodder_list)
 
-      expect(ration.calcium_phosphor_balance).to eq 1.3
+      expect(ration.public_send("calcium_phosphor_balance")).to eq 1.3
     end
   end
 end
