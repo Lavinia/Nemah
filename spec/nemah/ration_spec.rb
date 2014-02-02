@@ -130,6 +130,25 @@ describe Nemah::Ration do
     end
   end
 
+  describe '#calcium_magnesium_in_balance?' do
+    it_behaves_like 'a balance' do
+      let(:balance) { :calcium_magnesium }
+      let(:first_nutrient) { double(name: :calcium, unit: :g) }
+      let(:second_nutrient) { double(name: :magnesium, unit: :g) }
+      let(:allowed) { 2.0..3.0 }
+    end
+  end
+
+  describe '#calcium_magnesium_balance' do
+    it 'returns the balance' do
+      need = double('fake_need', calcium: double('calcium', unit: :mg), magnesium: double('magnesium', unit: :mg))
+      fodder_list = Nemah::FodderList.new({ Nemah::Fodder.new('hay', { :calcium => 2.6, :magnesium => 2.0 }) => 5 })
+      ration = Nemah::Ration.new(need, fodder_list)
+
+      expect(ration.public_send("calcium_magnesium_balance")).to eq 1.3
+    end
+  end
+
   describe '#calcium_phosphor_balance' do
     it 'returns the balance' do
       need = double('fake_need', calcium: double('calcium', unit: :mg), phosphor: double('phosphor', unit: :mg))

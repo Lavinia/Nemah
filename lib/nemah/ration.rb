@@ -19,6 +19,14 @@ module Nemah
       total(:calcium) / total(:phosphor)
     end
 
+    def calcium_magnesium_in_balance?
+      (2.0..3.0).include? calcium_magnesium_balance
+    end
+
+    def calcium_magnesium_balance
+      total(:calcium) / total(:magnesium)
+    end
+
     private
 
     def enough?(nutrient)
