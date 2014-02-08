@@ -121,21 +121,21 @@ describe Nemah::Ration do
     end
   end
 
-  describe '#calcium_phosphor_in_balance?' do
-    it_behaves_like 'a balance' do
-      let(:balance) { :calcium_phosphor }
-      let(:first_nutrient) { double(name: :calcium, unit: :g) }
-      let(:second_nutrient) { double(name: :phosphor, unit: :g) }
-      let(:allowed) { 1.2..1.8 }
-    end
-  end
-
   describe '#calcium_magnesium_in_balance?' do
     it_behaves_like 'a balance' do
       let(:balance) { :calcium_magnesium }
       let(:first_nutrient) { double(name: :calcium, unit: :g) }
       let(:second_nutrient) { double(name: :magnesium, unit: :g) }
       let(:allowed) { 2.0..3.0 }
+    end
+  end
+
+  describe '#calcium_phosphor_in_balance?' do
+    it_behaves_like 'a balance' do
+      let(:balance) { :calcium_phosphor }
+      let(:first_nutrient) { double(name: :calcium, unit: :g) }
+      let(:second_nutrient) { double(name: :phosphor, unit: :g) }
+      let(:allowed) { 1.2..1.8 }
     end
   end
 
@@ -155,23 +155,23 @@ describe Nemah::Ration do
     end
   end
 
-  describe '#calcium_magnesium_balance' do
-    it 'returns the balance' do
-      need = double('fake_need', calcium: double('calcium', unit: :mg), magnesium: double('magnesium', unit: :mg))
-      fodder_list = Nemah::FodderList.new({ Nemah::Fodder.new('hay', { :calcium => 2.6, :magnesium => 2.0 }) => 5 })
-      ration = Nemah::Ration.new(need, fodder_list)
-
-      expect(ration.calcium_magnesium_balance).to eq 1.3
+  describe 'balances' do
+    it 'returns the calcium-magnesium balance' do
+      expect(ration(:calcium, :magnesium).calcium_magnesium_balance).to eq 1.3
     end
-  end
 
-  describe '#calcium_phosphor_balance' do
-    it 'returns the balance' do
-      need = double('fake_need', calcium: double('calcium', unit: :mg), phosphor: double('phosphor', unit: :mg))
-      fodder_list = Nemah::FodderList.new({ Nemah::Fodder.new('hay', { :calcium => 2.6, :phosphor => 2.0 }) => 5 })
-      ration = Nemah::Ration.new(need, fodder_list)
+    it 'returns the calcium-phosphor balance' do
+      expect(ration(:calcium, :phosphor).calcium_phosphor_balance).to eq 1.3
+    end
 
-      expect(ration.calcium_phosphor_balance).to eq 1.3
+    it 'returns the protein-energy balance' do
+      expect(ration(:protein, :energy).protein_energy_balance).to eq 1.3
+    end
+
+    def ration(first_nutrient, second_nutrient)
+      need = double('fake_need', first_nutrient => double(first_nutrient.to_s, unit: :mg), second_nutrient => double(second_nutrient.to_s, unit: :mg))
+      fodder_list = Nemah::FodderList.new({ Nemah::Fodder.new('hay', { first_nutrient => 2.6, second_nutrient => 2.0 }) => 5 })
+      Nemah::Ration.new(need, fodder_list)
     end
   end
 end
