@@ -7,26 +7,25 @@ module Nemah
       @fodder_list = fodder_list
     end
 
+    def balance(first_nutrient, second_nutrient)
+      total(first_nutrient) / total(second_nutrient)
+    end
+
     def calcium_magnesium_in_balance?
-      (2.0..3.0).include? calcium_magnesium_balance
+      (2.0..3.0).include? balance(:calcium, :magnesium)
     end
 
     def calcium_phosphor_in_balance?
-      (1.2..1.8).include? calcium_phosphor_balance
+      (1.2..1.8).include? balance(:calcium, :phosphor)
     end
 
     def protein_energy_in_balance?
-      protein_energy_balance >= 6.0
+      balance(:protein, :energy) >= 6.0
     end
 
     Nemah::Nutrients.names.each do |nutrient|                     # def enough_nutrient?
       define_method("enough_#{nutrient}?") { enough?(nutrient) }  #   enough?(:nutrient)
     end                                                           # end
-
-    balances = [[:calcium, :magnesium], [:calcium, :phosphor], [:protein, :energy]]
-    balances.each do |(first, second)|                                              # def calcium_phosphor_balance
-      define_method("#{first}_#{second}_balance") { total(first) / total(second) }  #   total(:calcium) / total(:phosphor)
-    end                                                                             # end
 
     private
 
