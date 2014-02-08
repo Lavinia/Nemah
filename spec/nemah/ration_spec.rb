@@ -145,7 +145,7 @@ describe Nemah::Ration do
       fodder_list = Nemah::FodderList.new({ Nemah::Fodder.new('hay', { :calcium => 2.6, :magnesium => 2.0 }) => 5 })
       ration = Nemah::Ration.new(need, fodder_list)
 
-      expect(ration.public_send("calcium_magnesium_balance")).to eq 1.3
+      expect(ration.calcium_magnesium_balance).to eq 1.3
     end
   end
 
@@ -155,7 +155,7 @@ describe Nemah::Ration do
       fodder_list = Nemah::FodderList.new({ Nemah::Fodder.new('hay', { :calcium => 2.6, :phosphor => 2.0 }) => 5 })
       ration = Nemah::Ration.new(need, fodder_list)
 
-      expect(ration.public_send("calcium_phosphor_balance")).to eq 1.3
+      expect(ration.calcium_phosphor_balance).to eq 1.3
     end
   end
 end
