@@ -22,17 +22,18 @@ Or install it yourself as:
 
 ## Usage
 
-### Initial version
+### Currently implemented functionality
 
-* Calculate a horse's need of energy, protein, solids, macrominerals, and selenium.
+* Calculate a working horse's need of energy, protein, solids, macrominerals, and selenium.
 * Calculations are made internally with at least three digits precision. Public methods will return values rounded to two decimals by default.
+* Balances, e.g. calcium-phosphor, protein-energy etc.
+* Rations, i.e. given a horse with a need, and a fodder list, does the horse get enough nutrients in proper balances?
 
 ### Yet to be implemented
 
-* Microminerals apart from selenium
-* Balances
-* Rations (_in progress_)
+* Microminerals and their specific balances apart from selenium.
 * Given a horse, its needs, and a list of fodder, calculate suitable rations.
+* Support horses with very specific needs, e.g. mares with foals, young horses, race horses etc.
 
 ## Contributing
 
