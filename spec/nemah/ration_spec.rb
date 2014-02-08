@@ -139,6 +139,22 @@ describe Nemah::Ration do
     end
   end
 
+  describe '#protein_energy_in_balance?' do
+    it 'returns true when at least 6g protein per MJ energy' do
+      expect(ration(protein: 6.0).protein_energy_in_balance?).to be_true
+    end
+
+    it 'returns false when less than 6g protein per MJ energy' do
+      expect(ration(protein: 5.9).protein_energy_in_balance?).to be_false
+    end
+
+    def ration(protein: :not_specified)
+      need = double('fake_need', energy: double('energy', unit: :MJ), protein: double('protein', unit: :g))
+      fodder_list = Nemah::FodderList.new({ Nemah::Fodder.new('hay', { :energy => 1, :protein => protein }) => 5 })
+      ration = Nemah::Ration.new(need, fodder_list)
+    end
+  end
+
   describe '#calcium_magnesium_balance' do
     it 'returns the balance' do
       need = double('fake_need', calcium: double('calcium', unit: :mg), magnesium: double('magnesium', unit: :mg))

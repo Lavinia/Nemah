@@ -27,6 +27,14 @@ module Nemah
       total(:calcium) / total(:magnesium)
     end
 
+    def protein_energy_in_balance?
+      protein_energy_balance >= 6.0
+    end
+
+    def protein_energy_balance
+      total(:protein) / total(:energy)
+    end
+
     private
 
     def enough?(nutrient)
