@@ -23,9 +23,10 @@ module Nemah
       balance(:protein, :energy) >= 6.0
     end
 
-    Nemah::Nutrients.names.each do |nutrient|                     # def enough_nutrient?
-      define_method("enough_#{nutrient}?") { enough?(nutrient) }  #   enough?(:nutrient)
-    end                                                           # end
+    Nemah::Nutrients.names.each do |nutrient|
+      define_method("enough_#{nutrient}?") { enough?(nutrient) }
+      define_method("total_#{nutrient}") { total(nutrient) }
+    end
 
     private
 

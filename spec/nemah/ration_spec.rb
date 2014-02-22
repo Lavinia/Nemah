@@ -170,4 +170,73 @@ describe Nemah::Ration do
       Nemah::Ration.new(need, fodder_list)
     end
   end
+
+  shared_examples_for 'the total of a nutrient' do
+    it 'returns the total nutritional value of a nutrient for all fodders' do
+      need = double('fake_need', nutrient => double("fake_#{nutrient}", unit: unit))
+      hay = Nemah::Fodder.new('hay', nutrient => 12)
+      grass = Nemah::Fodder.new('grass', nutrient => 2.6)
+      fodders = { hay => 5, grass => 8 }
+      fodder_list = Nemah::FodderList.new(fodders)
+      rations = Nemah::Ration.new(need, fodder_list)
+
+      expect(rations.public_send("total_#{nutrient}")).to eq expected
+    end
+  end
+
+  describe '#total_energy' do
+    it_behaves_like 'the total of a nutrient' do
+      let(:nutrient) { :energy }
+      let(:unit) { :MJ }
+      let(:expected) { 80.8 }
+    end
+  end
+
+  describe '#total_protein' do
+    it_behaves_like 'the total of a nutrient' do
+      let(:nutrient) { :protein }
+      let(:unit) { :g }
+      let(:expected) { 80.8 }
+    end
+  end
+
+  describe '#total_calcium' do
+    it_behaves_like 'the total of a nutrient' do
+      let(:nutrient) { :calcium }
+      let(:unit) { :g }
+      let(:expected) { 80.8 }
+    end
+  end
+
+  describe '#total_phosphor' do
+    it_behaves_like 'the total of a nutrient' do
+      let(:nutrient) { :phosphor }
+      let(:unit) { :g }
+      let(:expected) { 80.8 }
+    end
+  end
+
+  describe '#total_selenium' do
+    it_behaves_like 'the total of a nutrient' do
+      let(:nutrient) { :selenium }
+      let(:unit) { :mg }
+      let(:expected) { 80.8 }
+    end
+  end
+
+  describe '#total_salt' do
+    it_behaves_like 'the total of a nutrient' do
+      let(:nutrient) { :salt }
+      let(:unit) { :g }
+      let(:expected) { 80.8 }
+    end
+  end
+
+  describe '#total_solids' do
+    it_behaves_like 'the total of a nutrient' do
+      let(:nutrient) { :solids }
+      let(:unit) { :kg }
+      let(:expected) { 0.808 }
+    end
+  end
 end
