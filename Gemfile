@@ -4,5 +4,5 @@ source 'https://rubygems.org'
 gemspec
 
 group :development, :test do
-  gem 'byebug', '~> 2.5', platforms: :mri
+  gem 'byebug', '~> 3', platforms: :mri
 end
